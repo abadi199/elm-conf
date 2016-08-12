@@ -48,6 +48,10 @@ section.has-light-background {
 	}
 }
 
+.reveal pre {
+	padding: 1em;
+}
+
 // Theme template ------------------------------
 @import "../../bower_components/reveal.js/css/theme/template/theme";
 // ---------------------------------------------

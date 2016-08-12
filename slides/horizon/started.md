@@ -1,4 +1,4 @@
-# Getting Started
+## Getting Started
 
 - Install RethinkDB
 - Install Node.js v4.4 or higher
