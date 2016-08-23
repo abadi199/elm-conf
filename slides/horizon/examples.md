@@ -1,21 +1,17 @@
 ## Examples
 ```javascript
-const hz = new Horizon();
-const messages = hz('messages');
+var messages = new Horizon()('messages');
+messages
+    .findAll({from: 'elm'})
+    .limit(5)
+    .watch()
+    .subscribe(data => { console.log(data); });
 
-// Watch for data
-messages.watch().subscribe(data => { console.log(data); });
+messages.store({ from: 'elm', msg: 'Hello World!' });
+// [ { from: 'elm', msg: 'Hello World!' }]
 
-// Storing data
-messages.store({ msg: 'Hello World!' });
+messages.store({ from: 'elm', msg: 'From Elm Conference' });
+// [ { from: 'elm', msg: 'Hello World!' }, { from: 'elm', msg: 'From Elm Conference' }]
 
-// Storing another data
-messages.store({ msg: 'From Elm Conference' });
-```
-
-Console.log
-```
-[]
-[ { id: "...", msg: "Hello World!" } ]
-[ { id: "...", msg: "Hello World!" }, { id: "...", msg : "From Elm Conference" } ]
+messages.store({ from: 'abadi', msg: 'Just ignore me!' });
 ```

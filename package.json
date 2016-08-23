@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "devDependencies": {
+    "bower": "^1.7.9",
     "coffeelint": "^1.0.0",
     "gh-pages-travis": "^1.0.0",
     "grunt": "^0.4.5",
     "grunt-build-control": "^0.5.0",
+    "grunt-cli": "^1.2.0",
     "grunt-coffeelint": "0.0.13",
     "grunt-contrib-connect": "^0.10.1",
     "grunt-contrib-copy": "^0.8.0",
@@ -24,6 +26,7 @@
     "url": "git@github.com:abadi199/elm-conf-slides.git"
   },
   "scripts": {
+    "postinstall": "bower install",
     "start": "grunt serve",
     "test": "grunt test"
   }

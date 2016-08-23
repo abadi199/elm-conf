@@ -13,19 +13,13 @@
             }
         },
         {
-            "filename": "horizon/started.md",
+            "filename": "horizon/collection.html",
             "attr": {
                 "data-background": "#ffffff"
             }
         },
         {
             "filename": "horizon/examples.md",
-            "attr": {
-                "data-background": "#ffffff"
-            }
-        },
-        {
-            "filename": "horizon/collection.html",
             "attr": {
                 "data-background": "#ffffff"
             }
@@ -61,28 +55,28 @@
             "attr": {
                 "data-background": "#ffffff"
             }
-        }                                        
+        }
     ],
     [
-        { 
+        {
             "filename": "examples/examples.md",
             "attr": {
                 "data-background": "#ffffff"
             }
         },
-        { 
+        {
             "filename": "examples/subscriptions.md",
             "attr": {
                 "data-background": "#ffffff"
             }
         },
-        { 
+        {
             "filename": "examples/msg.md",
             "attr": {
                 "data-background": "#ffffff"
             }
         },
-        { 
+        {
             "filename": "examples/update.md",
             "attr": {
                 "data-background": "#ffffff"
