@@ -20,7 +20,7 @@ Horizon is realtime, open source backend for JavaScript apps
 ## Collection API
 
 | Read | Write  | Modifiers 
-|-|-|-
+|------|--------|----------|
 | `fetch` | `remove` | `above`
 | `watch` | `removeAll`| `below`
 | | `insert` | `find`
