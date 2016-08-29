@@ -1,0 +1,32 @@
+{
+  "name": "elm-conf",
+  "version": "1.0.0",
+  "description": "My slides for Elm Conf on 15th Sept 2016 at St. Louis",
+  "main": "index.js",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "grunt-cli": "^1.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-remark": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "remark": "^6.0.0",
+    "remark-html": "^5.0.1",
+    "remark-lint": "^5.0.1"
+  },
+  "scripts": {
+    "start": "gulp",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abadi199/elm-conf.git"
+  },
+  "author": "abadi199",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/abadi199/elm-conf/issues"
+  },
+  "homepage": "https://github.com/abadi199/elm-conf#readme"
+}
