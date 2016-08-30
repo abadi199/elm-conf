@@ -2,10 +2,12 @@ class: title middle center
 # 0-60 in 15 Minutes
 ## Building a Realtime App With Elm and Horizon.js
 
-![Elm Whale](images/elm-whale.png "Elm Whale")
+.logo[.elm[![Elm Logo](images/elm-logo.png "Elm Logo")]]
 
 - Abadi Kurniawan
 - Senior Developer @EngageSoftware
+
+
 - [https://twitter.com/abadikurniawan](https://twitter/abadikurniawan)
 - [https://github/abadi199](https://github/abadi199)
 
@@ -21,7 +23,7 @@ Horizon is realtime, open source backend for JavaScript apps
 
 [https://horizon.io](https://horizon.io)
 
-![Horizon Logo](images/horizon-logo.png "Horizon Logo")
+.logo[.horizon[![Horizon Logo](images/horizon-logo.png "Horizon Logo")]]
 
 ???
 Before we begins, I'll give a quick background about what horizon is.
@@ -37,7 +39,7 @@ class: horizon center
 ### Collection API
 
 | Read | Write  | Modifiers 
-|------|--------|----------|
+|:----:|:------:|:--------:|
 | `fetch` | `remove` | `above`
 | `watch` | `removeAll`| `below`
 | | `insert` | `find`
@@ -113,14 +115,12 @@ class: middle
 ### Simple Chat App
 
 ---
-class: middle
-## Source Code
-[https://github.com/abadi199/elm-horizon](https://github.com/abadi199/elm-horizon)
-
-## Slide
-[https://github.com/abadi199/elm-conf](https://github.com/abadi199/elm-conf)
-
----
 class: thanks center middle
 # Thanks
-![Elm Logo](images/elm-logo.png "Elm Logo")
+
+.image[.elm-whale[![Elm Whale](images/elm-whale.png "Elm Whale")]]
+
+Source Code : [https://github.com/abadi199/elm-horizon](https://github.com/abadi199/elm-horizon)
+
+Slide : [https://abadi199.github.com/elm-conf](https://abadi199.github.com/elm-conf)
+

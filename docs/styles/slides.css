@@ -13,28 +13,28 @@ h1, h2, h3 {
   padding: 1.5em; }
 
 a {
-  color: black;
+  color: #EEA400;
   text-decoration: none; }
 
-.title ul {
+.remark-slide-content.title ul {
   padding-left: 0;
   margin-left: 0; }
-  .title ul li {
+  .remark-slide-content.title ul li {
     list-style: none; }
 
-.title img {
-  width: 200px; }
-
-.horizon {
+.remark-slide-content.horizon {
   background: url("../images/fg-mountains.png"), #fff;
   background-repeat: no-repeat;
   background-position: 50% 100%; }
-  .horizon img {
+  .remark-slide-content.horizon img {
     width: 150px; }
-  .horizon table {
-    width: 100%; }
+  .remark-slide-content.horizon table {
+    margin: 0 auto;
+    width: 60%; }
+    .remark-slide-content.horizon table th, .remark-slide-content.horizon table td {
+      width: 33%; }
 
-.elm:before {
+.remark-slide-content.elm:before {
   content: "";
   position: absolute;
   height: 10px;
@@ -46,13 +46,14 @@ a {
   bottom: 0;
   left: 0; }
 
-.diagram .ports {
-  text-align: center; }
-  .diagram .ports img {
-    width: 90%; }
+.logo .elm img {
+  width: 120px; }
+
+.diagram .ports img {
+  width: 90%; }
 
 .diagram .elm-horizon img {
   width: 80%; }
 
-.thanks img {
+.image .elm-whale img {
   width: 200px; }
