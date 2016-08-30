@@ -1,23 +1,40 @@
-<!-- $theme: default -->
-
+class: title middle center
 # 0-60 in 15 Minutes
-## Building a Realtime App With Elm and Horizon
+## Building a Realtime App With Elm and Horizon.js
 
-Abadi Kurniawan
-@abadikurniawan
+![Elm Whale](images/elm-whale.png "Elm Whale")
 
-Senior Developer 
-@EngageSoftware
+- Abadi Kurniawan
+- Senior Developer @EngageSoftware
+- [https://twitter.com/abadikurniawan](https://twitter/abadikurniawan)
+- [https://github/abadi199](https://github/abadi199)
+
+???
+Hi, My name is Abadi Kurniawan, and today I will be talking about building a realtime app with elm and horizon js.
+I'm a senior software developer at a st. louis based company called engage software, where I've been using elm in production for about 7 months.
 
 ---
+class: horizon center middle
 #  What is Horizon?
-
-[https://horizon.io](https://horizon.io)
 
 Horizon is realtime, open source backend for JavaScript apps
 
+[https://horizon.io](https://horizon.io)
+
+![Horizon Logo](images/horizon-logo.png "Horizon Logo")
+
+???
+Before we begins, I'll give a quick background about what horizon is.
+Horizon is an open-source development platform for building realtime, scalable web apps. 
+It's built on top of Rethink DB by the Rethink DB team, and runs on node.js.
+
+
+
+
 ---
-## Collection API
+class: horizon center
+## Horizon Client
+### Collection API
 
 | Read | Write  | Modifiers 
 |------|--------|----------|
@@ -29,7 +46,11 @@ Horizon is realtime, open source backend for JavaScript apps
 | | `update` | `order`
 | | `upsert` |
 
+???
+This is  the note
+
 ---
+class: horizon
 ## Examples
 ```javascript
 var messages = new Horizon()('messages');
@@ -51,13 +72,18 @@ messages.store({from:'abadi',msg:'Just ignore me!'});
 ```
 
 ---
-# Elm
-## Ports & Subscriptions
+class: elm ports center middle
+## Elm - Ports & Subscriptions
+
+![Ports & Subscriptions Diagram](images/ports.png "Ports & Subscriptions Diagram")
 
 ---
-[insert image here]
+class: elm elm-horizon center middle
+## Elm-Horizon
+![Elm Horizon Diagram](images/elm-horizon.png "Elm Horizon")
 
 ---
+class: elm
 ## Example
 ```elm
 subscriptions =
@@ -82,10 +108,12 @@ update msg model =
 ```
 
 ---
+class: middle
 # Demo
 ### Simple Chat App
 
 ---
+class: middle
 ## Source Code
 [https://github.com/abadi199/elm-horizon](https://github.com/abadi199/elm-horizon)
 
@@ -93,7 +121,6 @@ update msg model =
 [https://github.com/abadi199/elm-conf](https://github.com/abadi199/elm-conf)
 
 ---
+class: thanks center middle
 # Thanks
-
-@abadikurniawan
-github.com/abadi199
+![Elm Logo](images/elm-logo.png "Elm Logo")
