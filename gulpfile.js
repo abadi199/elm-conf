@@ -7,7 +7,7 @@ var browserSync = require('browser-sync').create();
 gulp.task('style', function() {
   gulp.src('styles/slides.scss')
     .pipe(sass())
-    .pipe(gulp.dest('dist/styles'))
+    .pipe(gulp.dest('./docs/styles'))
     .pipe(browserSync.stream());
 });
 
@@ -22,7 +22,7 @@ gulp.task('md', function() {
       }
     }))
     .pipe(rename('index.html'))
-    .pipe(gulp.dest('dist'))
+    .pipe(gulp.dest('./docs'))
 });
 
 gulp.task('md-watch', ['md'], function(done) {
@@ -32,7 +32,7 @@ gulp.task('md-watch', ['md'], function(done) {
 
 gulp.task('js', function() {
   gulp.src('js/**/*.js')
-    .pipe(gulp.dest('dist/js'))
+    .pipe(gulp.dest('./docs/js'))
 });
 
 gulp.task('js-watch', ['js'], function(done) {
@@ -42,7 +42,7 @@ gulp.task('js-watch', ['js'], function(done) {
 
 gulp.task('images', function() {
   gulp.src('images/**/*')
-    .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest('./docs/images'))
 });
 
 gulp.task('images-watch', ['images'], function(done) {
@@ -52,7 +52,7 @@ gulp.task('images-watch', ['images'], function(done) {
 
 gulp.task('watch', ['build'], function() {
   browserSync.init({
-        server: "./dist"
+        server: "./docs"
     });
 
   gulp.watch('styles/**/*.scss', ['style']);
@@ -63,7 +63,7 @@ gulp.task('watch', ['build'], function() {
 
 gulp.task('serve', ['build'], function() {
   browserSync.init({
-        server: "./dist"
+        server: "./docs"
     });
 });
 
