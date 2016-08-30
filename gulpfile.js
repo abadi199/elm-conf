@@ -68,3 +68,4 @@ gulp.task('serve', ['build'], function() {
 });
 
 gulp.task('build', ['js', 'style', 'images', 'md']);
+gulp.task('default', ['build']);
