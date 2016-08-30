@@ -1,0 +1,58 @@
+body {
+  font-family: 'Droid Serif'; }
+
+h1, h2, h3 {
+  font-family: 'Yanone Kaffeesatz';
+  font-weight: normal; }
+
+.remark-code, .remark-inline-code {
+  font-family: 'Ubuntu Mono'; }
+
+.remark-code.hljs {
+  border: 5px solid #ccc;
+  padding: 1.5em; }
+
+a {
+  color: black;
+  text-decoration: none; }
+
+.title ul {
+  padding-left: 0;
+  margin-left: 0; }
+  .title ul li {
+    list-style: none; }
+
+.title img {
+  width: 200px; }
+
+.horizon {
+  background: url("../images/fg-mountains.png"), #fff;
+  background-repeat: no-repeat;
+  background-position: 50% 100%; }
+  .horizon img {
+    width: 150px; }
+  .horizon table {
+    width: 100%; }
+
+.elm:before {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 100%;
+  background: url("../images/elm-background.svg");
+  background-size: calc(100% + 30px);
+  background-position: -10px 0;
+  background-repeat: no-repeat;
+  bottom: 0;
+  left: 0; }
+
+.diagram .ports {
+  text-align: center; }
+  .diagram .ports img {
+    width: 90%; }
+
+.diagram .elm-horizon img {
+  width: 80%; }
+
+.thanks img {
+  width: 200px; }

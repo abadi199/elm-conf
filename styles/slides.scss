@@ -38,14 +38,6 @@ a { color: rgb(0,0,0); text-decoration: none; }
 }
 
 .elm { 
-    // background: url('../images/elm-logo.png'), #fff;
-    background-repeat: no-repeat;
-    background-size: 100px;
-    background-position: 95% 5%;
-    p { text-align: center; 
-        img { width: 90%; }
-    }  
-
     &:before {
         content: "";
         position: absolute;
@@ -55,15 +47,17 @@ a { color: rgb(0,0,0); text-decoration: none; }
         background-size: calc(100% + 30px);
         background-position: -10px 0;
         background-repeat: no-repeat;
-        top: 0;
+        bottom: 0;
         left: 0;
     }
 }
 
-.elm-horizon {
-    p { text-align: center; 
-        img { width: 80%; }
-    }
+.diagram .ports { text-align: center; 
+    img { width: 90%; }
+}
+
+.diagram .elm-horizon {
+    img { width : 80%; }
 }
 
 .thanks {
