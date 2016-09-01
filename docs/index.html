@@ -175,7 +175,7 @@ encodeModifier modifier =
 #### Example
 ```bash
 > encode <| Limit 100
-{ modifier = "limit", value = 10 } : Json.Decode.Value\
+{ modifier = "limit", value = 10 } : Json.Decode.Value
 
 > encodeModifier <| Horizon.FindAll <| encode { from = "Elm" }
 { modifier = "findAll", value = { from = "Elm" } } : Json.Decode.Value
