@@ -26,25 +26,49 @@ a {
   background: url("../images/fg-mountains.png"), #fff;
   background-repeat: no-repeat;
   background-position: 50% 100%; }
-  .remark-slide-content.horizon img {
-    width: 150px; }
-  .remark-slide-content.horizon table {
-    margin: 0 auto;
-    width: 60%; }
-    .remark-slide-content.horizon table th, .remark-slide-content.horizon table td {
-      width: 33%; }
+  .remark-slide-content.horizon:before {
+    display: none; }
 
-.remark-slide-content.elm:before {
+.remark-slide-content:before {
   content: "";
   position: absolute;
-  height: 10px;
+  height: 15px;
   width: 100%;
   background: url("../images/elm-background.svg");
   background-size: calc(100% + 30px);
   background-position: -10px 0;
   background-repeat: no-repeat;
-  bottom: 0;
+  top: -1px;
   left: 0; }
+
+.table table {
+  margin: 0 auto; }
+
+.table.wide table {
+  width: 100%; }
+
+.table.medium table {
+  width: 60%; }
+
+.table.three-columns table th, .table.three-columns table td {
+  width: 33%; }
+
+.social-media {
+  margin-top: 2em; }
+  .social-media .twitter, .social-media .github {
+    width: 200px;
+    display: inline-block;
+    text-align: center; }
+    .social-media .twitter .logo, .social-media .github .logo {
+      display: block; }
+      .social-media .twitter .logo img, .social-media .github .logo img {
+        width: 30px; }
+    .social-media .twitter a, .social-media .github a {
+      clear: both;
+      display: block; }
+
+.logo .horizon img {
+  width: 120px; }
 
 .logo .elm img {
   width: 120px; }
@@ -53,7 +77,7 @@ a {
   width: 90%; }
 
 .diagram .elm-horizon img {
-  width: 80%; }
+  width: 700px; }
 
 .image .elm-whale img {
   width: 200px; }

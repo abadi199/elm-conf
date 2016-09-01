@@ -5,11 +5,13 @@ class: title middle center
 .logo[.elm[![Elm Logo](images/elm-logo.png "Elm Logo")]]
 
 - Abadi Kurniawan
-- Senior Developer @EngageSoftware
+- Senior Developer @Engage Software
 
 
-- [https://twitter.com/abadikurniawan](https://twitter/abadikurniawan)
-- [https://github/abadi199](https://github/abadi199)
+.social-media[
+.twitter[.logo[![Twitter Logo](images/twitter.png "Twitter Logo")] [@abadikurniawan](https://twitter/abadikurniawan)]
+.github[.logo[![Github Logo](images/github.png "Github Logo")] [abadi199](https://github/abadi199)]
+]
 
 ???
 Hi, My name is Abadi Kurniawan, and today I will be talking about building a realtime app with elm and horizon js.
@@ -38,6 +40,7 @@ class: horizon center
 ## Horizon Client
 ### Collection API
 
+.table.medium.three-columns[
 | Read | Write  | Modifiers 
 |:----:|:------:|:--------:|
 | `fetch` | `remove` | `above`
@@ -47,13 +50,14 @@ class: horizon center
 | | `store` | `limit`
 | | `update` | `order`
 | | `upsert` |
+]
 
 ???
 This is  the note
 
 ---
 class: horizon
-## Examples
+## JS - Examples
 ```javascript
 var messages = new Horizon()('messages');
 messages
@@ -85,32 +89,85 @@ class: elm elm-horizon center middle
 .diagram[.elm-horizon[![Elm Horizon Diagram](images/elm-horizon.png "Elm Horizon")]]
 
 ---
-class: elm
-## Example
-```elm
-subscriptions =
-    Sub.batch 
-    	[ watchSub messageDecoder NewMessage
-        , insertSub responseDecoder SendMessageResponse
-        ]
+class: elm center 
+## Elm-Horizon
+### Collection API
 
-init = 
-    ( initialModel
-    , watchCmd "messages"
-        [ FindAll [{ from = "Elm" }]
-        , Limit 5
-        ] 
-    )
-        
-update msg model =
-    SendMessage message ->
-        ( model
-        , insertCmd "messages" <| encoder message
-        )
-```
+
+
+.table.wide.three-columns[
+| Read           | Write              | Modifiers                | 
+|:--------------:|:------------------:|:------------------------:|
+| `watchCmd/Sub` | `removeCmd/Sub`    | `Above Json.Value`       |
+| `fetchCmd/Sub` | `removeAllCmd/Sub` | `Below Json.Value`       |
+|                | `insertCmd/Sub`    | `Find (List Json.Value)` |
+|                | `replaceCmd/Sub`   | `FindAll Json.Value`     |
+|                | `storeCmd/Sub`     | `Limit Int`              |
+|                | `updateCmd/Sub`    | `Order String Direction` |
+|                | `upsertCmd/Sub`    |                          |
+]
 
 ---
-class: middle
+class: elm
+## watchCmd/Sub
+```elm
+watchCmd : String -> List Modifier -> Cmd msg
+watchCmd collectionName modifiers = ...
+   
+watchSub : Decoder a -> (Result Error (List (Maybe a)) -> msg) -> Sub msg
+watchSub decoder tagger = ...
+```
+#### Example 
+```elm
+subscriptions = watchSub messageDecoder NewMessage
+
+init = ( initialModel
+        , watchCmd "messages"
+            [ FindAll <| encode { from = "Elm" }
+            , Limit 5
+            ]
+        )
+```
+---
+## insertCmd/Sub
+```elm
+insertCmd : String -> List Json.Value -> Cmd msg
+insertCmd collectionName data = ...
+
+insertSub : (Result Error () -> msg) -> Sub msg
+insertSub resultTagger = ...
+```
+#### Example
+```elm
+update msg model = 
+    case msg of
+        Insert message -> 
+            ( model, insertCmd "messages" [ encode message ] )
+
+subscriptions = insertSub InsertResponse
+```
+---
+## Modifiers
+```elm
+encodeModifier : Modifier -> Json.Value
+encodeModifier modifier =
+    case modifier of
+        Limit number ->
+            Encode.object 
+                [ ( "modifier", Encode.string "limit" )
+                , ( "value", Encode.int number ) 
+                ]
+```
+#### Example
+```bash
+> encode <| Limit 100
+{ modifier = "limit", value = 10 } : Json.Decode.Value\
+
+> encodeModifier <| Horizon.FindAll <| encode { from = "Elm" }
+{ modifier = "findAll", value = { from = "Elm" } } : Json.Decode.Value
+```
+---
+class: center middle
 # Demo
 ### Simple Chat App
 
