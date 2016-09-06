@@ -31,6 +31,13 @@ class: title middle center
 Hi, My name is Abadi Kurniawan, and today I will be talking about building a realtime app with elm and horizon js.
 I'm a senior software developer at a st. louis based company called engage software, where I've been using elm in production for about 7 months.
 
+Today, I will be talking about using elm with horizon js to build a realtime app.
+
+We are all here because we love elm. Or at least you've interested in elm. I personally love elm. Elm is a great language and really fun to use.
+It has pretty much solved my JavaScript fatigure, I don't need to pick from millions of different library, tools, and framework. I just need to choose Elm.
+Now, I wish I can have the same experience in the backend, but until we can use Elm in the backend, we will have to settle with whatever languages available to use.
+
+And then I found horizon.
 ---
 class: horizon center middle
 #  What is Horizon?
@@ -42,17 +49,69 @@ Horizon is realtime, open source backend for JavaScript apps
 .logo[.horizon[![Horizon Logo](images/horizon-logo.png "Horizon Logo")]]
 
 ???
-Before we begins, I'll give a quick background about what horizon is.
 Horizon is an open-source development platform for building realtime, scalable web apps. 
 It's built on top of Rethink DB by the Rethink DB team, and runs on node.js.
 
+If you're familiar with Firebase, horizon is similar to Firebase, but it's open source, and you can host your own horizon server on your own server.
 
+In this talk, I'm still using horizon version 1, and horizon version 2 was recently released a few weeks ago. 
+But all the API that I'll be talking about are still valid for version 2. In v2, they've added new features such as query aggregation, 
+auth0 integration, and support for native websocket.
+ 
+---
+class: horizon api center  
+## Horizon API
+- Authentication
 
+???
+Horizon provides several API. The first on is 
+---
+class: horizon api center  
+## Horizon API
+- Authentication
+- Users & Groups
 
+???
+---
+class: horizon api center  
+## Horizon API
+- Authentication
+- Users & Groups
+- Permissions
+
+???
+---
+class: horizon api center  
+## Horizon API
+- Authentication
+- Users & Groups
+- Permissions
+- Collection API
+
+???
+---
+class: horizon api center  
+## Horizon API
+- Authentication
+- Users & Groups
+- Permissions
+- Collection API
+- Horizon API
+
+???
+---
+class: horizon api final center 
+## Horizon API
+- Authentication
+- Users & Groups
+- Permissions
+- **Collection API**
+- Horizon API
+
+???
 ---
 class: horizon center
-## Horizon Client
-### Collection API
+## Collection API
 
 .table.medium.three-columns[
 | Read | Write  | Modifiers 
@@ -67,11 +126,11 @@ class: horizon center
 ]
 
 ???
-This is  the note
+Horizon provides several API that you can use. 
 
 ---
 class: horizon
-## JS - Examples
+## Horizon.js - Example
 ```javascript
 var messages = new Horizon()('messages');
 messages
@@ -84,9 +143,8 @@ messages.store({from:'elm',msg:'Hello World!'});
 // [{from:'elm',msg:'Hello World!'}]
 
 messages.store({from:'elm',msg:'From Elm Conference'});
-// [{from:'elm',msg:'Hello World!'}
-// ,{from:'elm',msg:'From Elm Conference'}
-// ]
+// [{from:'elm',msg:'Hello World!'},
+// {from:'elm',msg:'From Elm Conference'}]
 
 messages.store({from:'abadi',msg:'Just ignore me!'});
 ```
@@ -97,6 +155,10 @@ class: elm ports center middle
 
 .diagram[.ports[![Ports & Subscriptions Diagram](images/ports.png "Ports & Subscriptions Diagram")]]
 
+???
+
+Horizon version 1 was implemented with engine.io, which is an implementation of transport-based cross-browser/cross-device bi-directional communication layer for socket.io.
+So that rules out elm websocket from our options. 
 ---
 class: elm elm-horizon center middle
 ## Elm-Horizon

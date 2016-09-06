@@ -17,10 +17,8 @@ font-weight: normal;
 a { color: $elm-yellow; text-decoration: none; }
 
 .remark-slide-content {
-    &.title  { 
-        ul { padding-left: 0; margin-left: 0; 
-            li { list-style: none; 
-            }
+    ul { padding-left: 0; margin-left: 0; 
+        li { list-style: none; padding-bottom: 0.5em; 
         }
     }
 
@@ -28,8 +26,17 @@ a { color: $elm-yellow; text-decoration: none; }
         &:before { display: none ; } 
         background: url('../images/fg-mountains.png'), #fff; 
         background-repeat: no-repeat;
-        background-position: 50% 100%; 
+        background-position: 50% 100%;
+
+        &.api {
+            h2 { margin-top: 3em; }
+            &.final {
+                li { color: #aaa; }
+                li strong { color: #000; }
+            }
+        } 
     }
+
 
     &:before {
         content: "";

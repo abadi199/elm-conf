@@ -16,11 +16,12 @@ a {
   color: #EEA400;
   text-decoration: none; }
 
-.remark-slide-content.title ul {
+.remark-slide-content ul {
   padding-left: 0;
   margin-left: 0; }
-  .remark-slide-content.title ul li {
-    list-style: none; }
+  .remark-slide-content ul li {
+    list-style: none;
+    padding-bottom: 0.5em; }
 
 .remark-slide-content.horizon {
   background: url("../images/fg-mountains.png"), #fff;
@@ -28,6 +29,12 @@ a {
   background-position: 50% 100%; }
   .remark-slide-content.horizon:before {
     display: none; }
+  .remark-slide-content.horizon.api h2 {
+    margin-top: 3em; }
+  .remark-slide-content.horizon.api.final li {
+    color: #aaa; }
+  .remark-slide-content.horizon.api.final li strong {
+    color: #000; }
 
 .remark-slide-content:before {
   content: "";
