@@ -3,6 +3,17 @@ $elm-blue: #5FB4CB;
 $elm-green: #8CD636;
 $elm-yellow: #EEA400;
 
+@mixin table-highlight($column) {
+    table { 
+        th, td {
+            color: #aaa;
+            &:nth-of-type(#{$column}) {
+                color: #000;
+            }
+        }
+    }
+}
+
 body { font-family: 'Droid Serif'; }
 h1, h2, h3 {
 font-family: 'Yanone Kaffeesatz';
@@ -14,7 +25,7 @@ font-weight: normal;
     padding: 1.5em;
 }
 
-a { color: $elm-yellow; text-decoration: none; }
+a { color: $elm-gray; text-decoration: none; }
 
 .remark-slide-content {
     ul { padding-left: 0; margin-left: 0; 
@@ -34,7 +45,18 @@ a { color: $elm-yellow; text-decoration: none; }
                 li { color: #aaa; }
                 li strong { color: #000; }
             }
+        }
+
+        &.write {
+            @include table-highlight(1);
         } 
+
+        &.read {
+            @include table-highlight(2);
+        } 
+        &.modifiers {
+            @include table-highlight(3);
+        }
     }
 
 

@@ -13,7 +13,7 @@ h1, h2, h3 {
   padding: 1.5em; }
 
 a {
-  color: #EEA400;
+  color: #596277;
   text-decoration: none; }
 
 .remark-slide-content ul {
@@ -35,6 +35,18 @@ a {
     color: #aaa; }
   .remark-slide-content.horizon.api.final li strong {
     color: #000; }
+  .remark-slide-content.horizon.write table th, .remark-slide-content.horizon.write table td {
+    color: #aaa; }
+    .remark-slide-content.horizon.write table th:nth-of-type(1), .remark-slide-content.horizon.write table td:nth-of-type(1) {
+      color: #000; }
+  .remark-slide-content.horizon.read table th, .remark-slide-content.horizon.read table td {
+    color: #aaa; }
+    .remark-slide-content.horizon.read table th:nth-of-type(2), .remark-slide-content.horizon.read table td:nth-of-type(2) {
+      color: #000; }
+  .remark-slide-content.horizon.modifiers table th, .remark-slide-content.horizon.modifiers table td {
+    color: #aaa; }
+    .remark-slide-content.horizon.modifiers table th:nth-of-type(3), .remark-slide-content.horizon.modifiers table td:nth-of-type(3) {
+      color: #000; }
 
 .remark-slide-content:before {
   content: "";
