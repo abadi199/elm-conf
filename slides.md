@@ -14,8 +14,9 @@ class: title middle center
 ]
 
 ???
-Hi, My name is Abadi Kurniawan, and today I will be talking about building a realtime app with elm and horizon js.
+Hi, My name is Abadi Kurniawan.
 I'm a senior software developer at a st. louis based company called engage software, where I've been using elm in production for about 7 months.
+Today I will be talking about building a realtime app with elm and horizon js.
 
 Today, I will be talking about using elm with horizon js to build a realtime app.
 
