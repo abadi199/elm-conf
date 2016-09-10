@@ -15,10 +15,12 @@ $elm-yellow: #EEA400;
 }
 
 body { font-family: 'Droid Serif'; }
-h1, h2, h3 {
+h1, h2, h3, h4 {
 font-family: 'Yanone Kaffeesatz';
 font-weight: normal;
 }
+
+h4 { font-size: 24px; margin-bottom: 0; margin-top: 2em; }
 .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
 .remark-code.hljs {
     border: 5px solid #ccc;
@@ -33,6 +35,10 @@ a { color: $elm-gray; text-decoration: none; }
         }
     }
 
+    &.elm.heart {
+        h1 { font-size: 100px; }
+    }
+
     &.horizon {
         &:before { display: none ; } 
         background: url('../images/fg-mountains.png'), #fff; 
@@ -41,9 +47,11 @@ a { color: $elm-gray; text-decoration: none; }
 
         &.api {
             h2 { margin-top: 3em; }
+            li { color: #aaa; }
+            li strong { font-weight: normal; color: #000; }
             &.final {
-                li { color: #aaa; }
-                li strong { color: #000; }
+                li { color: #ccc; }
+                li strong { font-weight: bold; color: #000; }
             }
         }
 
@@ -59,7 +67,21 @@ a { color: $elm-gray; text-decoration: none; }
         }
     }
 
+    &.brilliant {
+        background: url('../images/it-crowd-maurice-moss-brilliant.gif');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
 
+        &:before { display: none; }
+    }
+
+    &.frustration {
+        background: url('../images/it-crowd-maurice-moss-frustration.gif');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        &:before { display: none; }
+    }
     &:before {
         content: "";
         position: absolute;
@@ -108,3 +130,5 @@ a { color: $elm-gray; text-decoration: none; }
 .diagram .elm-horizon img { width : 700px; }
 
 .image .elm-whale img { width: 200px; }
+.image .elm-heart img { width: 100px; }
+.image .face img { width: 200px; }

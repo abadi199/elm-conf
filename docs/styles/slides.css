@@ -1,9 +1,14 @@
 body {
   font-family: 'Droid Serif'; }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: 'Yanone Kaffeesatz';
   font-weight: normal; }
+
+h4 {
+  font-size: 24px;
+  margin-bottom: 0;
+  margin-top: 2em; }
 
 .remark-code, .remark-inline-code {
   font-family: 'Ubuntu Mono'; }
@@ -23,6 +28,9 @@ a {
     list-style: none;
     padding-bottom: 0.5em; }
 
+.remark-slide-content.elm.heart h1 {
+  font-size: 100px; }
+
 .remark-slide-content.horizon {
   background: url("../images/fg-mountains.png"), #fff;
   background-repeat: no-repeat;
@@ -31,9 +39,15 @@ a {
     display: none; }
   .remark-slide-content.horizon.api h2 {
     margin-top: 3em; }
-  .remark-slide-content.horizon.api.final li {
+  .remark-slide-content.horizon.api li {
     color: #aaa; }
+  .remark-slide-content.horizon.api li strong {
+    font-weight: normal;
+    color: #000; }
+  .remark-slide-content.horizon.api.final li {
+    color: #ccc; }
   .remark-slide-content.horizon.api.final li strong {
+    font-weight: bold;
     color: #000; }
   .remark-slide-content.horizon.write table th, .remark-slide-content.horizon.write table td {
     color: #aaa; }
@@ -47,6 +61,20 @@ a {
     color: #aaa; }
     .remark-slide-content.horizon.modifiers table th:nth-of-type(3), .remark-slide-content.horizon.modifiers table td:nth-of-type(3) {
       color: #000; }
+
+.remark-slide-content.brilliant {
+  background: url("../images/it-crowd-maurice-moss-brilliant.gif");
+  background-repeat: no-repeat;
+  background-size: 100% 100%; }
+  .remark-slide-content.brilliant:before {
+    display: none; }
+
+.remark-slide-content.frustration {
+  background: url("../images/it-crowd-maurice-moss-frustration.gif");
+  background-repeat: no-repeat;
+  background-size: 100% 100%; }
+  .remark-slide-content.frustration:before {
+    display: none; }
 
 .remark-slide-content:before {
   content: "";
@@ -99,4 +127,10 @@ a {
   width: 700px; }
 
 .image .elm-whale img {
+  width: 200px; }
+
+.image .elm-heart img {
+  width: 100px; }
+
+.image .face img {
   width: 200px; }

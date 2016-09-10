@@ -19,27 +19,56 @@ I'm a senior software developer at a st. louis based company called engage softw
 
 Today, I will be talking about using elm with horizon js to build a realtime app.
 ---
-class: elm center middle
-# I .heart[❤] Elm
+class: elm heart center middle
+# I .image[.elm-heart[![❤](images/heart.png "❤")]] Elm
 ???
-I love elm. And since this is an elm conference, I think it's safe to assume that we all here we love elm. Or at least you're interested in elm.  
-I think Elm is a great language and also a really fun language to use. But the thing about elm is, it makes me want to keep writing elm code,
-and everytime I have to use other language to write my backend code, I can't wait to go back to switching back to front end so I can write more elm code.
-I wish I can use elm to write my backend code. But since that probably won't happend anytime soon, I stuck with using other language to write my backend code.
+I love elm. 
 
-But what if you don't have to use other language. What if I don't have to write any backend code at all?
+I think Elm is a great language and also Elm is really fun to use. 
+
 ---
-class: horizon center middle
+class: center middle
+.image[.face[![Happy](images/happy.png "happy")]]
+???
+This is pretty much how I feel whenever I have to work on my frontend code using Elm.
+But the downside of Elm is, it makes you kinda like other languages a lot less.
+---
+class: center middle
+.image[.face[![Frown](images/frown.png "Frown")]]
+
+???
+This is how I feel everytime I have to work on my backend code.
+I just want to use Elm. But since we can't really use Elm in the backend yet, so we're stuck with other languages.
+
+But what if there's another option. 
+Maybe you don't have to write any backend code at all?
+Maybe I can turn this frown face into a happy face again.
+---
+class: center middle
+.image[.face[![Happy](images/happy.png "Happy")]]
+
+---
+class: center middle
 # Horizon
+???
 
-Horizon is a realtime, open source backend for JavaScript apps
+---
 
-[https://horizon.io](https://horizon.io)
+class: horizon center middle
+# What is Horizon?
 
 .logo[.horizon[![Horizon Logo](images/horizon-logo.png "Horizon Logo")]]
 
 ???
 So, what is horizon?
+
+---
+class: horizon center middle
+### Horizon is a realtime, open source backend for JavaScript apps
+
+[https://horizon.io](https://horizon.io)
+
+???
 Horizon is an open-source development platform for building realtime, scalable web apps. 
 It's built on top of RethinkDB by the RethinkDB team, and runs on node.js.
 
@@ -49,13 +78,21 @@ With horizon, you can write realtime client side javascript application without 
 ---
 class: horizon api center
 ## Horizon API
-
+- Authentication
+- Users & Groups
+- Permissions
+- Collection API
+- Horizon API
 ???
 Horizon provides several API. 
 ---
 class: horizon api center
 ## Horizon API
-- Authentication
+- **Authentication**
+- Users & Groups
+- Permissions
+- Collection API
+- Horizon API
 
 ???
 The first one is authentication. Horizon provides a way for your app to do user authentication.
@@ -63,7 +100,10 @@ The first one is authentication. Horizon provides a way for your app to do user 
 class: horizon api center  
 ## Horizon API
 - Authentication
-- Users & Groups
+- **Users & Groups**
+- Permissions
+- Collection API
+- Horizon API
 
 ???
 The second one is Users & Groups, which is how you manage the users and groups in their system when you use their authentication API. 
@@ -72,7 +112,9 @@ class: horizon api center
 ## Horizon API
 - Authentication
 - Users & Groups
-- Permissions
+- **Permissions**
+- Collection API
+- Horizon API
 
 ???
 and then we have Permissions API, which is how you configure the permissions, which users will have access to which data.
@@ -82,7 +124,8 @@ class: horizon api center
 - Authentication
 - Users & Groups
 - Permissions
-- Collection API
+- **Collection API**
+- Horizon API
 
 ???
 the next one is Collection API. This is how you create, read, update, and delete data in the database.
@@ -93,7 +136,7 @@ class: horizon api center
 - Users & Groups
 - Permissions
 - Collection API
-- Horizon API
+- **Horizon API**
 
 ???
 and the last one is Horizon API, which is the API to manage the connection to the horizon server itself, such as opening connection, error handling, and so on.
@@ -132,8 +175,8 @@ Collection API is a way for you to read and write into a collection, or RethinkD
 I'm grouping this API into 3 categories. This is not an official classification by Horizon. 
 I just find it helpful to think about this API this way and how I can implement this in Elm.
 
-The first category is the Write action, which consists of remove, removeAll, insert, replace, store, update, and upsert. 
-These are all actions that do some sort of writing/updating to the database. 
+The first category is the Write operations, which consists of remove, removeAll, insert, replace, store, update, and upsert. 
+These are all operations that do some sort of writing/updating to the database. 
 
 ---
 class: horizon center collection read
@@ -152,7 +195,7 @@ class: horizon center collection read
 ]
 
 ???
-The second category is Read action, which contains fetch and watch. Both actions are use to read data from your collection, 
+The second category is Read operation, which contains fetch and watch. Both operations are use to read data from your collection, 
 the difference is that with fetch, you only get the data once, similar to how select in sql works, while watch is you create a subscription to the data 
 that you're interested in, and whenever there's some changes to these data, you will receive a new data.
 ---
@@ -171,17 +214,14 @@ class: horizon center collection modifiers
 | `upsert`    |         |
 ]
 ???
-The last category is Modifiers. This is the interesting one. So these are all action that will "modify" your read action. 
+The last category is Modifiers. This is the interesting one. So these are all operations that will "modify" your read operation. 
+the way you use these modifiers operations are by applying them to your read operations. SO in a way, it modifies your read operations.
 
-We have above and below methods which will restrict the results to values that are above or below some certain values. 
+Above, below, find, and findAll are some kind of filtering modifiers.
 
-And then we have find and findAll that will restrict your results that matches certain values. 
+Limit: will limit the number of data your want to get. 
 
-And then we have limit that limit the number of data your want to get. 
-
-And the last one is order, which will sort the results based on certain field. 
-
-You use these modifiers methods with the read methods, to modify the results that you'll get back from horizon.
+And order, will sort the results based on certain fields. 
 ---
 class: horizon
 ## Horizon.js - Example
@@ -193,24 +233,27 @@ messages
     .watch()
     .subscribe(data => { console.log(data); });
 
-messages.store({ from: 'elm', msg: 'Hello World!' });
+messages.insert({ from: 'elm', msg: 'Hello World!' });
 // [{from:'elm',msg:'Hello World!'}]
 
-messages.store({ from: 'elm', msg: 'From Elm Conference' });
+messages.insert({ from: 'elm', msg: 'From Elm Conference' });
 // [{from:'elm',msg:'Hello World!'},
 // {from:'elm',msg:'From Elm Conference'}]
 
-messages.store({ from: 'abadi', msg: 'Just ignore me!' });
+messages.insert({ from: 'abadi', msg: 'Just ignore me!' });
 ```
-
+Let's say we want to build a simple chat app.
+Here's a sample code of what my chat app could look like.
 ---
 class: elm center middle
 # Elm-Horizon
 .logo[.elm[![Elm Logo](images/elm-logo.png "Elm Logo")]]
 .logo[.horizon[![Horizon Logo](images/horizon-logo.png "Horizon Logo")]]
 ???
-Ok, since this is an Elm conference, so I'm gonna bring this back to elm. How can we use horizon with elm in a nice way, 
-so we don't have to write any code other than Elm code. Of course, the best way is to use elm web socket to talk to horizon server, and perhaps implements a some library on top of elm web socket to make the api nicer. Unfortunatly, at least until today we can really do this yet. On version 1, horizon implemented their communication layer with engine.io, which they replaced with native web socket on version 2. But as far as I know, there's no public API available yet on how to do web socket communication directly. So, the second best way is to use their javascript client library, and we can use Ports and Subscriptions to communicate to this library.  
+Ok, so how can we use horizon with elm in a nice way, 
+so we don't have to write any code other than Elm code. 
+
+Horizon provides a javascript client library, and we can use Ports and Subscriptions to communicate to this library.  
 ---
 class: elm ports center middle
 ## Elm - Ports & Subscriptions
@@ -218,37 +261,77 @@ class: elm ports center middle
 .diagram[.ports[![Ports & Subscriptions Diagram](images/ports.png "Ports & Subscriptions Diagram")]]
 
 ???
-Ports and Subscriptions are a way for elm to interop with javascripts. It's basically a message passing between elm and javascript, just like message passing between elm app and server. For sending data from elm to javascript, we use ports, and for receiving data from javascript to elm, we use subscriptions.
+Let's talk about ports and subscriptions first.
 
+Ports and Subscriptions are a way for elm to interop with javascripts. 
+
+It's basically a message passing between elm and javascript, just like message passing between elm app and server. 
+
+Similar to how you do message passing between client and server. But instead, it's between elm and javascript.
+
+For sending data from elm to javascript, we use ports, and for receiving data from javascript to elm, we use subscriptions. 
+
+and you can only send and receive a certain type of data, like string, integer, records, 
+
+or if you want to send some arbitrary shaped of data, you can use json values. 
 ---
 class: elm elm-horizon center middle
 ## Elm-Horizon
 .diagram[.elm-horizon[![Elm Horizon Diagram](images/elm-horizon.png "Elm Horizon")]]
 
 ???
-Now, let's see how we we can use ports and subscription with Horizon. So we'll use port to send json values out to horizon javascript client, and then we receive the json values back in using subscriptions. Each read and write actions will have a pair of ports and subscriptions. 
+Now, let's see how we we can use ports and subscription with Horizon.
 
-In the case of read action, we will send the message of what queries we're interested in subscribing to via ports using watch command and fetch command, and then we will receive the data via the matching watch subscription and fetch subscription.
+ So we'll use port to send json values out to horizon javascript client, and then we receive the json values back in using subscriptions. 
+ 
+ Each read and write operations will have a pair of ports and subscriptions. 
 
-In the case of write action, we send the message of what to insert, remove, update, etc, via ports, and we use subscription to get the status of that command.
+In the case of read operation, which is watch and fetch, 
+
+the data that will send out via port will be the information about the query, in this case the name of the collection,
+and the modifiers.
+
+and then we will receive the actual collection data via the subscription.
+
+In the case of write operation, we send the data that we want to write to the collection via port,
+
+and we use subscription to get the status of that operation.
+
+and then the horizon javascript library will then handles all the network communication with the server.
 ---
 class: elm center 
 ## Elm-Horizon
 ### Collection API
 
 .table.wide.three-columns[
-| Read           | Write              | Modifiers                | 
-|:--------------:|:------------------:|:------------------------:|
-| `watchCmd/Sub` | `removeCmd/Sub`    | `Above Json.Value`       |
-| `fetchCmd/Sub` | `removeAllCmd/Sub` | `Below Json.Value`       |
-|                | `insertCmd/Sub`    | `Find (List Json.Value)` |
-|                | `replaceCmd/Sub`   | `FindAll Json.Value`     |
-|                | `storeCmd/Sub`     | `Limit Int`              |
-|                | `updateCmd/Sub`    | `Order String Direction` |
-|                | `upsertCmd/Sub`    |                          |
+| Write              | Read           | Modifiers                | 
+|:------------------:|:--------------:|:------------------------:|
+| `removeCmd/Sub`    | `watchCmd/Sub` | `Above Json.Value`       |
+| `removeAllCmd/Sub` | `fetchCmd/Sub` | `Below Json.Value`       |
+| `insertCmd/Sub`    |                | `Find (List Json.Value)` |
+| `replaceCmd/Sub`   |                | `FindAll Json.Value`     |
+| `storeCmd/Sub`     |                | `Limit Int`              |
+| `updateCmd/Sub`    |                | `Order String Direction` |
+| `upsertCmd/Sub`    |                |                          |
 ]
 ???
-So, here are those 3 categories of Collection API look like in Elm-Horizon. We have pairs of command and subscription function for each read and write actions. What I found interesting is the modifiers. Here, I implemented modifiers as union types, with each values has some data relevant to what the modifier is trying to do. For example, Limit modifiers will have Int for the number of data you want to subscribe to.
+So, here are those 3 categories of Collection API look like in Elm. 
+
+We have pairs of command and subscription functions for each read and write actions. 
+
+The command is for sending message out to horizon js, and the subscription is to receive the message back from horizon js.
+
+The modifiers is a little bit different. Here, modifiers are implemented as union types
+ 
+with each constructor requires data relevant to what the modifier is trying to do. 
+
+Above, Below, Find, and FindAll constructors require Json value which is the criteria of the filter. 
+
+Limit constructor requires an integer, which is the number of data you want to get.
+
+and Order contructor requires a String, which is the name of the field you want to sort by,
+
+and a union types called Direction, that can be either Descending or Ascending.
 ---
 class: elm
 ## watchCmd/Sub
@@ -261,15 +344,29 @@ watchSub decoder tagger = ...
 ```
 #### Example 
 ```elm
-subscriptions = watchSub messageDecoder NewMessage
-
 init = ( initialModel
         , watchCmd "chat_messages"
             [ FindAll <| encode { from = "Elm" }
             , Limit 5
             ]
         )
+
+subscriptions = watchSub chatMessageDecoder NewChatMessage
 ```
+???
+Here's what the previous simple chat app will look like in Elm.
+
+On my init, I will call a watch command, passing in the collection name, in this case it's "chat_messages", 
+
+and a List of modifiers, in this case a FindAll with the filter criteria as a Json value, 
+
+and Limit of 5 to limit my data to only 5 rows.
+
+and I'm subscribing to watch subscription, passing in the decoder to decode my chat message, 
+
+and then passing in the result to NewChatMessage.
+
+SO that's the read operation.
 ---
 ## insertCmd/Sub
 ```elm
@@ -283,22 +380,45 @@ insertSub resultTagger = ...
 ```elm
 update msg model = 
     case msg of
-        Insert message -> 
-            ( model, insertCmd "chat_messages" [ encode message ] )
+        Insert chatMessage -> 
+            ( model, insertCmd "chat_messages" [ encode chatMessage ] )
 
 subscriptions = insertSub InsertResponse
 ```
+???
+and for the write operation:
+
+on my update function, I will call and insert command, 
+
+passing in the name of the collection, in this case "chat_messages", and a list of chat message record, encoded as Json.Value.
+
+and I'll subscribe to the insert subscription to get the status of my insert command.
 ---
 class: center middle
 # Demo
 ### Simple Chat App
 
+???
+And here's the end results. 
+This chat app is written purely in Elm, using the Elm-Horizon library. 
+
+There are some javascript code in the Elm-Horizon library itself, 
+
+but the chat application is written only using elm, no javascript, and no backend code.
 ---
 class: thanks center middle
 # Thanks
 
 .image[.elm-whale[![Elm Whale](images/elm-whale.png "Elm Whale")]]
 
-Source Code : [https://github.com/abadi199/elm-horizon](https://github.com/abadi199/elm-horizon)
+#### Source Code 
+[https://github.com/abadi199/elm-horizon](https://github.com/abadi199/elm-horizon)
 
-Slide : [https://abadi199.github.com/elm-conf](https://abadi199.github.com/elm-conf)
+#### Slide 
+[https://abadi199.github.com/elm-conf](https://abadi199.github.com/elm-conf)
+???
+That's all I have today.
+You can check out the source code for the elm horizon on my github repo, the code for the chat app is in the example folder.
+and you can access my slide on my github page, at abadi199.github.com/elm-conf.
+
+Thank you, and enjoy the rest of your conference.
