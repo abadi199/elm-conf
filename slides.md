@@ -228,33 +228,54 @@ class: horizon
 ```javascript
 var messages = new Horizon()('chat_messages');
 messages
-    .findAll({from: 'elm'})
+    .findAll({from: 'elmo'})
     .limit(5)
     .watch()
     .subscribe(data => { console.log(data); });
 
-messages.insert({ from: 'elm', msg: 'Hello World!' });
+messages.insert({ from: 'elmo', msg: 'Hello World!' });
 // [{from:'elm',msg:'Hello World!'}]
 
-messages.insert({ from: 'elm', msg: 'From Elm Conference' });
+messages.insert({ from: 'elmo', msg: 'From Elm Conference' });
 // [{from:'elm',msg:'Hello World!'},
 // {from:'elm',msg:'From Elm Conference'}]
 
 messages.insert({ from: 'abadi', msg: 'Just ignore me!' });
 ```
 ???
-Let's say we want to build a simple chat app.
+Let's say we want to build a silly chat app.
 Here's a sample code of what my chat app could look like.
+
+First, you want to create a connection to horizon server, 
+
+and you specify the name of the collection you want to work on, in this case it's "chat_messages".
+
+then you want to subscribe to that collection using watch, but let's just say we only care about all messages from a user called "elmo"
+so we use the findAll modifiers, and we only want to get last 5 messages, so we use another modifiers called limit, and passed in 5 as the argument.
+
+and then we subscribe to that data, and provide a callback to that subscription, which in this case we're just going to print the data to console.log.
+
+and then next, we insert a new chat message to the collection. and since this message is from the user "elmo", 
+
+our callback is going to get called, and we will see the message in our console.log.
+
+and then we send another message from elmo, and will will see both messages in our console log, first first one, and the new one.
+
+and then we insert another message, but this time, it's from the user abadi. This time we will not going to see anything in our console.log, since we only subscribe to messages from elmo.
+
 ---
 class: elm center middle
 # Elm-Horizon
 .logo[.elm[![Elm Logo](images/elm-logo.png "Elm Logo")]]
 .logo[.horizon[![Horizon Logo](images/horizon-logo.png "Horizon Logo")]]
 ???
-Ok, so how can we use horizon with elm in a nice way, 
-so we don't have to write any code other than Elm code. 
+OK, cool, so we can write an app in javascript. But that's not what we want. We want to write Elm code, not javascript code.
 
-Horizon provides a javascript client library, and we can use Ports and Subscriptions to communicate to this library.  
+So how can we use horizon with elm in a nice way, so we don't have to write any javascript code, and just write Elm code. 
+
+So we know Horizon provides a javascript client library, 
+
+and in Elm, in order to communicate to javascript, we will have to use Ports and Subscriptions.  
 ---
 class: elm ports center middle
 ## Elm - Ports & Subscriptions
@@ -262,19 +283,19 @@ class: elm ports center middle
 .diagram[.ports[![Ports & Subscriptions Diagram](images/ports.png "Ports & Subscriptions Diagram")]]
 
 ???
-Let's talk about ports and subscriptions first.
+Ok, so what is Ports and Subscriptions
 
 Ports and Subscriptions are a way for elm to interop with javascripts. 
 
-It's basically a message passing between elm and javascript, just like message passing between elm app and server. 
+It's basically a message passing between elm and javascript.
 
-Similar to how you do message passing between client and server. But instead, it's between elm and javascript.
+Similar to how you do message passing between client and server. But instead, it's between your elm application and some javascript code.
 
-For sending data from elm to javascript, we use ports, and for receiving data from javascript to elm, we use subscriptions. 
+For sending data out from elm to javascript, we use ports, and for receiving data in from javascript to elm, we use subscriptions. 
 
 and you can only send and receive a certain type of data, like string, integer, records, 
 
-or if you want to send some arbitrary shaped of data, you can use json values. 
+or if you want to send data with arbitrary shape, you can use json values. 
 ---
 class: elm elm-horizon center middle
 ## Elm-Horizon
@@ -285,18 +306,18 @@ Now, let's see how we we can use ports and subscription with Horizon.
 
  So we'll use port to send json values out to horizon javascript client, and then we receive the json values back in using subscriptions. 
  
- Each read and write operations will have a pair of ports and subscriptions. 
+Each read and write operations that we saw previously in the Collection API, will have a pair of ports and subscriptions. 
 
 In the case of read operation, which is watch and fetch, 
 
-the data that will send out via port will be the information about the query, in this case the name of the collection,
+will send out the information about the query via port, in this case the name of the collection,
 and the modifiers.
 
 and then we will receive the actual collection data via the subscription.
 
 In the case of write operation, we send the data that we want to write to the collection via port,
 
-and we use subscription to get the status of that operation.
+and then we will get the status of that operation via subscriptions.
 
 and then the horizon javascript library will then handles all the network communication with the server.
 ---
@@ -318,9 +339,11 @@ class: elm center
 ???
 So, here are those 3 categories of Collection API look like in Elm. 
 
-We have pairs of command and subscription functions for each read and write actions. 
+We have pairs of command and subscription functions for each read and write operations. 
 
-The command is for sending message out to horizon js, and the subscription is to receive the message back from horizon js.
+The command is for sending data or queries out to horizon js, 
+
+and the subscription is to receive the results, or data back from horizon js.
 
 The modifiers is a little bit different. Here, modifiers are implemented as union types
  
@@ -347,7 +370,7 @@ watchSub decoder tagger = ...
 ```elm
 init = ( initialModel
         , watchCmd "chat_messages"
-            [ FindAll <| encode { from = "Elm" }
+            [ FindAll <| encode { from = "elmo" }
             , Limit 5
             ]
         )
@@ -357,17 +380,17 @@ subscriptions = watchSub chatMessageDecoder NewChatMessage
 ???
 Here's what the previous simple chat app will look like in Elm.
 
-On my init, I will call a watch command, passing in the collection name, in this case it's "chat_messages", 
+On the init function, we will call a watch command, passing in the collection name, in this case it's "chat_messages", 
 
 and a List of modifiers, in this case a FindAll with the filter criteria as a Json value, 
 
-and Limit of 5 to limit my data to only 5 rows.
+and Limit of 5 to limit the data to only 5 rows. 
 
-and I'm subscribing to watch subscription, passing in the decoder to decode my chat message, 
+and on the subscriptions, we're subscribing to watch subscription, passing in the decoder to decode my chat message, 
 
-and then passing in the result to NewChatMessage.
+and then the result will be wrap in a NewChatMessage.
 
-SO that's the read operation.
+SO that's an example of how to do read operation.
 ---
 ## insertCmd/Sub
 ```elm
@@ -389,11 +412,11 @@ subscriptions = insertSub InsertResponse
 ???
 and for the write operation:
 
-on my update function, I will call and insert command, 
+on my update function, we will call an insert command, 
 
 passing in the name of the collection, in this case "chat_messages", and a list of chat message record, encoded as Json.Value.
 
-and I'll subscribe to the insert subscription to get the status of my insert command.
+and we'll subscribe to the insert subscription to get the status of the insert command.
 ---
 class: center middle
 # Demo
@@ -401,7 +424,8 @@ class: center middle
 
 ???
 And here's the end results. 
-This chat app is written purely in Elm, using the Elm-Horizon library. 
+This is not the silly chat app that we say in the example, 
+This is a simle chat app, written purely in Elm, using the Elm-Horizon library. 
 
 There are some javascript code in the Elm-Horizon library itself, 
 
