@@ -47,8 +47,7 @@ a { color: $elm-gray; text-decoration: none; }
 
         &.api {
             h2 { margin-top: 3em; }
-            li { color: #aaa; }
-            li strong { font-weight: normal; color: #000; }
+            li { color: #000; }
             &.final {
                 li { color: #ccc; }
                 li strong { font-weight: bold; color: #000; }
@@ -82,6 +81,11 @@ a { color: $elm-gray; text-decoration: none; }
 
         &:before { display: none; }
     }
+
+    &.conclusion {
+        img { vertical-align: middle; margin: 0 20px; }
+    }
+
     &:before {
         content: "";
         position: absolute;
@@ -123,8 +127,8 @@ a { color: $elm-gray; text-decoration: none; }
     }
 }
 
-.logo .horizon img { width: 120px; }
-.logo .elm img { width: 120px; }
+.logo img { width: 120px; }
+.logo img { width: 120px; }
 
 .diagram .ports img { width: 90%; }
 .diagram .elm-horizon img { width : 700px; }

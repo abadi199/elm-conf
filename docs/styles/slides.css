@@ -40,9 +40,6 @@ a {
   .remark-slide-content.horizon.api h2 {
     margin-top: 3em; }
   .remark-slide-content.horizon.api li {
-    color: #aaa; }
-  .remark-slide-content.horizon.api li strong {
-    font-weight: normal;
     color: #000; }
   .remark-slide-content.horizon.api.final li {
     color: #ccc; }
@@ -75,6 +72,10 @@ a {
   background-size: 100% 100%; }
   .remark-slide-content.frustration:before {
     display: none; }
+
+.remark-slide-content.conclusion img {
+  vertical-align: middle;
+  margin: 0 20px; }
 
 .remark-slide-content:before {
   content: "";
@@ -114,10 +115,10 @@ a {
       clear: both;
       display: block; }
 
-.logo .horizon img {
+.logo img {
   width: 120px; }
 
-.logo .elm img {
+.logo img {
   width: 120px; }
 
 .diagram .ports img {

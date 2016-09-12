@@ -12,6 +12,40 @@
   </head>
   <body>
     <textarea id="source" style="display: none">
+class: elm heart center middle
+# I .image[.elm-heart[![❤](images/heart.png "❤")]] Elm
+???
+I'm gonna start this talk by saying I love elm. 
+
+I think Elm is a great language and Elm is really fun to use. 
+
+---
+class: center middle
+.image[.face[![Happy](images/happy.png "happy")]]
+???
+I feel happy whenever I'm working on my front end, and writing Elm. 
+But there is a downside of Elm
+---
+class: center middle
+.image[.face[![Sad](images/sad.png "Sad")]]
+
+???
+I feel sad whenever I have to work on my backend code.
+I wish I can use Elm everywhere. But since we can't really use Elm in the server yet, so I'm stuck with my backend language.
+
+But what if there's another option. 
+Maybe you don't have to write any backend code at all?
+---
+class: center middle
+.image[.face[![Horizon](images/horizon-logo_2.png "Horizon")]]
+???
+What if I replace my backend with Horizon?
+---
+class: center middle
+.image[.face[![Happy](images/happy.png "Happy")]]
+???
+Maybe I can turn this sad face into happy face again.
+---
 class: title middle center
 # 0-60 in 15 Minutes
 ## Building a Realtime App With Elm and Horizon.js
@@ -19,7 +53,7 @@ class: title middle center
 .logo[.elm[![Elm Logo](images/elm-logo.png "Elm Logo")]]
 
 - Abadi Kurniawan
-- Senior Developer @Engage Software
+- Web Developer @Engage Software
 
 .social-media[
 .twitter[.logo[![Twitter Logo](images/twitter.png "Twitter Logo")] [@abadikurniawan](https://twitter/abadikurniawan)]
@@ -28,50 +62,16 @@ class: title middle center
 
 
 ???
-Hi, My name is Abadi Kurniawan.
-I'm a senior software developer at a st. louis based company called engage software, where I've been using elm in production for about 7 months.
+Hi everyone, My name is Abadi Kurniawan.
+I'm a web developer at engage software, where I've been using elm in production for about 7 months.
 
 Today, I will be talking about using elm with horizon js to build a realtime app.
----
-class: elm heart center middle
-# I .image[.elm-heart[![❤](images/heart.png "❤")]] Elm
-???
-I love elm. 
-
-I think Elm is a great language and also Elm is really fun to use. 
-
----
-class: center middle
-.image[.face[![Happy](images/happy.png "happy")]]
-???
-This is pretty much how I feel whenever I have to work on my frontend code using Elm.
-But the downside of Elm is, it makes you kinda like other languages a lot less.
----
-class: center middle
-.image[.face[![Frown](images/frown.png "Frown")]]
-
-???
-This is how I feel everytime I have to work on my backend code.
-I just want to use Elm. But since we can't really use Elm in the backend yet, so we're stuck with other languages.
-
-But what if there's another option. 
-Maybe you don't have to write any backend code at all?
-Maybe I can turn this frown face into a happy face again.
----
-class: center middle
-.image[.face[![Happy](images/happy.png "Happy")]]
-
----
-class: center middle
-# Horizon
-???
-
 ---
 
 class: horizon center middle
 # What is Horizon?
 
-.logo[.horizon[![Horizon Logo](images/horizon-logo.png "Horizon Logo")]]
+.logo[.horizon[![Horizon Logo](images/horizon-logo_2.png "Horizon Logo")]]
 
 ???
 So, what is horizon?
@@ -84,9 +84,7 @@ class: horizon center middle
 
 ???
 Horizon is an open-source development platform for building realtime, scalable web apps. 
-It's built on top of RethinkDB by the RethinkDB team, and runs on node.js.
-
-If you're familiar with Firebase, horizon is similar to Firebase, but it's open source, and you can host your own horizon server on your own server.
+It's built on top of RethinkDB and runs on node.js.
 
 With horizon, you can write realtime client side javascript application without writing backend code. 
 ---
@@ -97,63 +95,10 @@ class: horizon api center
 - Permissions
 - Collection API
 - Horizon API
-???
-Horizon provides several API. 
----
-class: horizon api center
-## Horizon API
-- **Authentication**
-- Users & Groups
-- Permissions
-- Collection API
-- Horizon API
 
 ???
-The first one is authentication. Horizon provides a way for your app to do user authentication.
----
-class: horizon api center  
-## Horizon API
-- Authentication
-- **Users & Groups**
-- Permissions
-- Collection API
-- Horizon API
-
-???
-The second one is Users & Groups, which is how you manage the users and groups in their system when you use their authentication API. 
----
-class: horizon api center  
-## Horizon API
-- Authentication
-- Users & Groups
-- **Permissions**
-- Collection API
-- Horizon API
-
-???
-and then we have Permissions API, which is how you configure the permissions, which users will have access to which data.
----
-class: horizon api center  
-## Horizon API
-- Authentication
-- Users & Groups
-- Permissions
-- **Collection API**
-- Horizon API
-
-???
-the next one is Collection API. This is how you create, read, update, and delete data in the database.
----
-class: horizon api center  
-## Horizon API
-- Authentication
-- Users & Groups
-- Permissions
-- Collection API
-- **Horizon API**
-
-???
-and the last one is Horizon API, which is the API to manage the connection to the horizon server itself, such as opening connection, error handling, and so on.
+Horizon provides several API.
+There's authentication, users and groups, permission, collection API and Horizon API.
 ---
 class: horizon api final center 
 ## Horizon API
@@ -371,25 +316,32 @@ and Order contructor requires a String, which is the name of the field you want 
 
 and a union types called Direction, that can be either Descending or Ascending.
 ---
-class: elm
-## watchCmd/Sub
+#### Example
 ```elm
-watchCmd : String -> List Modifier -> Cmd msg
-watchCmd collectionName modifiers = ...
-   
-watchSub : Decoder a -> (Result Error (List (Maybe a)) -> msg) -> Sub msg
-watchSub decoder tagger = ...
-```
-#### Example 
-```elm
-init = ( initialModel
-        , watchCmd "chat_messages"
-            [ FindAll <| encode { from = "elmo" }
-            , Limit 5
+init = ...
+        , Cmd.batch 
+            [ watchCmd "chat_messages"
+                [ FindAll <| encode { from = "elmo" }
+                , Limit 5
+                ]
+            , insertCmd "chat_messages" [ encode { from = "elmo", msg = "Hello World!" } ] 
+            , insertCmd "chat_messages" [ encode { from = "elmo", msg = "From Elm Conference" } ] 
+            , insertCmd "chat_messages" [ encode { from = "abadi", msg = "Just ignore me!" } ]
             ]
-        )
+       ...
 
-subscriptions = watchSub chatMessageDecoder NewChatMessage
+subscriptions = 
+    Sub.batch 
+        [ watchSub chatMessageDecoder NewChatMessage
+        , insertSub InsertResponse
+        ]
+
+update msg model =
+    case msg of
+        NewChatMessage chatMessages ->
+            let _ = Debug.log "Chat Message" chatMessages
+            ...
+
 ```
 ???
 Here's what the previous simple chat app will look like in Elm.
@@ -405,25 +357,7 @@ and on the subscriptions, we're subscribing to watch subscription, passing in th
 and then the result will be wrap in a NewChatMessage.
 
 SO that's an example of how to do read operation.
----
-## insertCmd/Sub
-```elm
-insertCmd : String -> List Json.Value -> Cmd msg
-insertCmd collectionName data = ...
 
-insertSub : (Result Error () -> msg) -> Sub msg
-insertSub resultTagger = ...
-```
-#### Example
-```elm
-update msg model = 
-    case msg of
-        Insert chatMessage -> 
-            ( model, insertCmd "chat_messages" [ encode chatMessage ] )
-
-subscriptions = insertSub InsertResponse
-```
-???
 and for the write operation:
 
 on my update function, we will call an insert command, 
@@ -437,13 +371,18 @@ class: center middle
 ### Simple Chat App
 
 ???
-And here's the end results. 
+And here's the end results.
 This is not the silly chat app that we say in the example, 
 This is a simle chat app, written purely in Elm, using the Elm-Horizon library. 
 
 There are some javascript code in the Elm-Horizon library itself, 
 
 but the chat application is written only using elm, no javascript, and no backend code.
+---
+class: conclusion center middle
+#.logo[.elm[!["Elm"](images/elm-logo.png "Elm")]] + .logo[.horizon[!["Horizon"](images/horizon-logo.png "Horizon")]] = .logo[.face[!["Happy"](images/happy.png "Happy")]]
+???
+So in conclusion, using elm with horizon makes me happy all the time.
 ---
 class: thanks center middle
 # Thanks
