@@ -277,8 +277,8 @@ class: elm center
 |:------------------:|:--------------:|:------------------------:|
 | `removeCmd/Sub`    | `watchCmd/Sub` | `Above Json.Value`       |
 | `removeAllCmd/Sub` | `fetchCmd/Sub` | `Below Json.Value`       |
-| `insertCmd/Sub`    |                | `Find (List Json.Value)` |
-| `replaceCmd/Sub`   |                | `FindAll Json.Value`     |
+| `insertCmd/Sub`    |                | `Find Json.Value` |
+| `replaceCmd/Sub`   |                | `FindAll (List Json.Value`)     |
 | `storeCmd/Sub`     |                | `Limit Int`              |
 | `updateCmd/Sub`    |                | `Order String Direction` |
 | `upsertCmd/Sub`    |                |                          |
@@ -322,7 +322,7 @@ init =
     ...
     Cmd.batch 
         [ watchCmd "chat_messages"
-            [ FindAll <| encode { from = "elmo" }
+            [ FindAll <| [ encode { from = "elmo" } ]
             , Limit 5
             ]
         , insertCmd "chat_messages" [ encode { from = "elmo", msg = "Hello World!" } ] 
@@ -344,7 +344,7 @@ On the init function, we will do a batch of watch command and insert commands.
 
 On the watch command, we'll pass in the collection name and a List of modifiers, 
 
-in this case a FindAll with the filter criteria as a Json value, 
+in this case a FindAll with the filter criterias as a list of Json values, 
 
 and Limit of 5 to limit the data to only 5 rows. 
 
