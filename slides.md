@@ -304,18 +304,6 @@ and a union types called Direction, that can be either Descending or Ascending.
 ---
 #### Example
 ```elm
-init = ...
-        , Cmd.batch 
-            [ watchCmd "chat_messages"
-                [ FindAll <| encode { from = "elmo" }
-                , Limit 5
-                ]
-            , insertCmd "chat_messages" [ encode { from = "elmo", msg = "Hello World!" } ] 
-            , insertCmd "chat_messages" [ encode { from = "elmo", msg = "From Elm Conference" } ] 
-            , insertCmd "chat_messages" [ encode { from = "abadi", msg = "Just ignore me!" } ]
-            ]
-       ...
-
 subscriptions = 
     Sub.batch 
         [ watchSub chatMessageDecoder NewChatMessage
@@ -328,40 +316,48 @@ update msg model =
             let _ = Debug.log "Chat Message" chatMessages
             ...
 
+init = 
+    ...
+    Cmd.batch 
+        [ watchCmd "chat_messages"
+            [ FindAll <| encode { from = "elmo" }
+            , Limit 5
+            ]
+        , insertCmd "chat_messages" [ encode { from = "elmo", msg = "Hello World!" } ] 
+        , insertCmd "chat_messages" [ encode { from = "elmo", msg = "From Elm Conference" } ] 
+        , insertCmd "chat_messages" [ encode { from = "abadi", msg = "Just ignore me!" } ]
+        ]
+    ...
 ```
 ???
 Here's what the previous simple chat app will look like in Elm.
 
-On the init function, we will call a watch command, passing in the collection name, in this case it's "chat_messages", 
+We'll subscribe to watch subscriptions, that will give us all the data from our watch command, 
 
-and a List of modifiers, in this case a FindAll with the filter criteria as a Json value, 
+and we also subscribe to insert subscription that will give us status of all our insert command.
+
+and on our update function, we'll just do Debug.log whenever there's a new chat message. 
+
+On the init function, we will do a batch of watch command and insert commands.
+
+On the watch command, we'll pass in the collection name and a List of modifiers, 
+
+in this case a FindAll with the filter criteria as a Json value, 
 
 and Limit of 5 to limit the data to only 5 rows. 
 
-and on the subscriptions, we're subscribing to watch subscription, passing in the decoder to decode my chat message, 
-
-and then the result will be wrap in a NewChatMessage.
-
-SO that's an example of how to do read operation.
-
-and for the write operation:
-
-on my update function, we will call an insert command, 
-
-passing in the name of the collection, in this case "chat_messages", and a list of chat message record, encoded as Json.Value.
-
-and we'll subscribe to the insert subscription to get the status of the insert command.
+and then we'll call insert command with the encoded values of the chat message.
 ---
 class: center middle
 # Demo
 ### Simple Chat App
 
 ???
-And here's the end results.
-This is not the silly chat app that we say in the example, 
-This is a simle chat app, written purely in Elm, using the Elm-Horizon library. 
+And I'm gonna do a demo of what we can build with elm and horizon.
 
-There are some javascript code in the Elm-Horizon library itself, 
+This simple chat app was written purely in Elm, using the Elm-Horizon library. 
+
+There are some javascript code in the Elm-Horizon library, 
 
 but the chat application is written only using elm, no javascript, and no backend code.
 ---
