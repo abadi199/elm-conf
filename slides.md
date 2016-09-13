@@ -72,7 +72,9 @@ class: horizon center middle
 Horizon is an open-source development platform for building realtime, scalable web apps. 
 It's built on top of RethinkDB and runs on node.js.
 
-With horizon, you can write realtime client side javascript application without writing backend code. 
+You can run horizon on your local machine, or on their cloud service, which is still in private beta at the moment. 
+
+With horizon, you can build a realtime javascript application without writing any backend code. 
 ---
 class: horizon api center
 ## Horizon API
