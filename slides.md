@@ -325,9 +325,9 @@ init =
             [ FindAll <| [ encode { from = "elmo" } ]
             , Limit 5
             ]
-        , insertCmd "chat_messages" [ encode { from = "elmo", msg = "Hello World!" } ] 
-        , insertCmd "chat_messages" [ encode { from = "elmo", msg = "From Elm Conference" } ] 
-        , insertCmd "chat_messages" [ encode { from = "abadi", msg = "Just ignore me!" } ]
+        , insertCmd "chat_messages" [ encodeChatMessage { from = "elmo", msg = "Hello World!" } ] 
+        , insertCmd "chat_messages" [ encodeChatMessage { from = "elmo", msg = "From Elm Conference" } ] 
+        , insertCmd "chat_messages" [ encodeChatMessage { from = "abadi", msg = "Just ignore me!" } ]
         ]
     ...
 ```
