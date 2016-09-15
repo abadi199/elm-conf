@@ -112,6 +112,11 @@ class: horizon api final center
 
 ???
 In this talk, I'm only going to cover Collection API.
+
+---
+class: horizon center middle 
+## What is Collection?
+Group of related documents, backed by RethinkDB table.
 ---
 class: horizon center collection write 
 ## Collection API
@@ -129,10 +134,6 @@ class: horizon center collection write
 ]
 
 ???
-What is collection?
-In horizon, a Collection is an object represents a group of related documents, and it's backed by RethinkDB table. 
-Collection API is a way for you to read and write into a collection, or RethinkDB table.
-
 I'm grouping this API into 3 categories. This is not an official classification by Horizon. 
 I just find it helpful to think about this API this way and how I can implement this in Elm.
 
@@ -226,7 +227,6 @@ and then we insert another message, but this time, it's from the user abadi. Thi
 
 ---
 class: elm center middle
-# Elm-Horizon
 .logo[.elm[![Elm Logo](images/elm-logo.png "Elm Logo")]]
 .logo[.horizon[![Horizon Logo](images/horizon-logo.png "Horizon Logo")]]
 ???
@@ -237,26 +237,6 @@ So how can we use horizon with elm in a nice way, so we don't have to write any 
 So we know Horizon provides a javascript client library, 
 
 and in Elm, in order to communicate to javascript, we will have to use Ports and Subscriptions.  
----
-class: elm ports center middle
-## Elm - Ports & Subscriptions
-
-.diagram[.ports[![Ports & Subscriptions Diagram](images/ports.png "Ports & Subscriptions Diagram")]]
-
-???
-Ok, so what is Ports and Subscriptions
-
-Ports and Subscriptions are a way for elm to interop with javascripts. 
-
-It's basically a message passing between elm and javascript.
-
-Similar to how you do message passing between client and server. But instead, it's between your elm application and some javascript code.
-
-For sending data out from elm to javascript, we use ports, and for receiving data in from javascript to elm, we use subscriptions. 
-
-and you can only send and receive a certain type of data, like string, integer, records, 
-
-or if you want to send data with arbitrary shape, you can use json values. 
 ---
 class: elm elm-horizon center middle
 ## Elm-Horizon
